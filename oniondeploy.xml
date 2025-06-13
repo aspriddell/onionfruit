@@ -6,7 +6,35 @@
         <Repo>onionfruit</Repo>
     </GitHub>
     <Velopack>
+        <Enabled>true</Enabled>
         <PackageId>onionfruit</PackageId>
-        <PackageIcon>DragonFruit.OnionFruit/Assets/icon.ico</PackageIcon>
     </Velopack>
+    <Windows>
+        <!-- <CodeSigningCertificate></CodeSigningCertificate> -->
+        <!-- <CodeSigningPassword></CodeSigningPassword> -->
+        <PackageIcon>DragonFruit.OnionFruit/Assets/icon.ico</PackageIcon>
+    </Windows>
+    <MacOS>
+        <!-- .plist files needed for the app to function -->
+        <InfoPlist>DragonFruit.OnionFruit.MacOS/Info.plist</InfoPlist>
+        <ServicePlist>DragonFruit.OnionFruit.MacOS/onionfruitd.plist</ServicePlist>
+        <EntitlementsPlist>DragonFruit.OnionFruit.MacOS/app.entitlements</EntitlementsPlist>
+
+        <!-- path to the onionfruitd service, must exist to build -->
+        <ServicePath>DragonFruit.OnionFruit.MacOS/onionfruitd</ServicePath>
+
+        <!-- contains .icns (macOS 13-15, DMG) and .icon (macOS 26+) files  -->
+        <IconsDirectory>DragonFruit.OnionFruit.MacOS/Icons</IconsDirectory>
+
+        <!-- whether a DMG should be created, signed and notarized. -->
+        <!-- requires the create-dmg script installed (brew install create-dmg) -->
+        <CreateInstallDMG>true</CreateInstallDMG>
+
+        <!-- replace with "Developer ID Application: ..." -->
+        <CodeSigningIdentity>Developer ID Application: Albie Spriddell (Q824VHAT9S)</CodeSigningIdentity>
+
+        <!-- Keychain profile to use with notarytool - store using `xcrun notarytool store-credentials` -->
+        <!-- https://developer.apple.com/documentation/security/customizing-the-notarization-workflow?language=objc#Upload-your-app-to-the-notarization-service -->
+        <NotaryKeychainProfile>notarytool</NotaryKeychainProfile>
+    </MacOS>
 </configuration>
