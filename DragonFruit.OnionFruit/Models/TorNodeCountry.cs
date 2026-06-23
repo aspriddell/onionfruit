@@ -26,7 +26,7 @@ namespace DragonFruit.OnionFruit.Models
                 // use globe if not known
                 if (CountryCode is null or IOnionDatabase.TorCountryCode)
                 {
-                    return "\U0001F6A9";
+                    return "\U0001F310";
                 }
 
                 var normalised = CountryCode.ToUpperInvariant();
