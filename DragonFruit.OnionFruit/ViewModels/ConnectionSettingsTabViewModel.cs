@@ -147,8 +147,8 @@ namespace DragonFruit.OnionFruit.ViewModels
             _selectedEntryCountry = entryCountry.ToProperty(this, x => x.SelectedEntryCountry).DisposeWith(_disposables);
             _selectedExitCountry = exitCountry.ToProperty(this, x => x.SelectedExitCountry).DisposeWith(_disposables);
 
-            _selectedEntryCountryFlag = entryCountry.Select(GetFlagEmoji).ToProperty(this, x => x.SelectedEntryCountryFlag).DisposeWith(_disposables);
-            _selectedExitCountryFlag = exitCountry.Select(GetFlagEmoji).ToProperty(this, x => x.SelectedExitCountryFlag).DisposeWith(_disposables);
+            _selectedEntryCountryFlag = entryCountry.Select(x => x.CountryFlagEmoji).ToProperty(this, x => x.SelectedEntryCountryFlag).DisposeWith(_disposables);
+            _selectedExitCountryFlag = exitCountry.Select(x => x.CountryFlagEmoji).ToProperty(this, x => x.SelectedExitCountryFlag).DisposeWith(_disposables);
 
             settings.GetObservableValue<int?>(OnionFruitSetting.MaxCircuitIdleTime)
                 .Select(x => (decimal?)x)
@@ -261,22 +261,6 @@ namespace DragonFruit.OnionFruit.ViewModels
         {
             get => _maxCircuitIdleTime.Value;
             set => _settings.SetValue(OnionFruitSetting.MaxCircuitIdleTime, (int?)value);
-        }
-
-        private static string GetFlagEmoji(TorNodeCountry country)
-        {
-            // use globe if not known
-            if (country?.CountryCode is null or IOnionDatabase.TorCountryCode)
-            {
-                return "\U0001F6A9";
-            }
-
-            var normalised = country.CountryCode.ToUpperInvariant();
-
-            int firstCodePoint = 0x1F1E6 + (normalised[0] - 'A');
-            int secondCodePoint = 0x1F1E6 + (normalised[1] - 'A');
-
-            return char.ConvertFromUtf32(firstCodePoint) + char.ConvertFromUtf32(secondCodePoint);
         }
 
         private void AddFirewallPortImpl()
