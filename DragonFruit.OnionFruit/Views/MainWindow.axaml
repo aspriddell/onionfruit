@@ -49,13 +49,18 @@
                                       OffContent=""
                                       VerticalAlignment="Center"
                                       Command="{Binding ToggleConnection}"
-                                      IsChecked="{Binding RibbonContent.ToggleChecked, Mode=OneWay}" />
+                                      IsChecked="{Binding RibbonContent.ToggleChecked, Mode=OneWay}"
+                                      AutomationProperties.Name="Toggle connection"
+                                      AutomationProperties.ControlTypeOverride="Button"
+                                      AutomationProperties.AutomationId="ToggleConnection"/>
 
                         <TextBlock DockPanel.Dock="Left"
                                    TabIndex="0"
                                    FontSize="20"
                                    FontWeight="SemiBold"
                                    VerticalAlignment="Center"
+                                   AutomationProperties.HeadingLevel="1"
+                                   AutomationProperties.LiveSetting="Assertive"
                                    Text="{Binding RibbonContent.Text}" />
                     </DockPanel>
                 </Panel>
@@ -88,7 +93,7 @@
                         </controls:SwitchingControl.SwitchFalse>
                         <controls:SwitchingControl.SwitchTrue>
                             <DataTemplate x:DataType="vm:MainWindowViewModel">
-                                <DockPanel>
+                                <DockPanel AutomationProperties.LandmarkType="Form">
                                     <Label DockPanel.Dock="Left" TabIndex="0" VerticalAlignment="Center"
                                            Margin="0, 0, 10, 0" Content="Country" />
                                     <ComboBox DockPanel.Dock="Left"
@@ -99,7 +104,10 @@
                                               SelectedValueBinding="{Binding CountryCode}"
                                               DisplayMemberBinding="{Binding CountryName}"
                                               SelectedValue="{Binding SelectedCountryCode}"
-                                              IsEnabled="{Binding AllowConfigurationChanges}" />
+                                              IsEnabled="{Binding AllowConfigurationChanges}"
+                                              AutomationProperties.Name="Country Selector"
+                                              AutomationProperties.AutomationId="CountrySelector"
+                                              AutomationProperties.ControlTypeOverride="Button"/>
                                 </DockPanel>
                             </DataTemplate>
                         </controls:SwitchingControl.SwitchTrue>
